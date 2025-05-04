@@ -14,36 +14,20 @@ function fibs(n) {
   return arr;
 }
 
-
-
-function fibRec(n) {
-  return n < 2 ? n : fibRec(n - 1) + fibRec(n - 2);
+function fibsRecNum(n) {
+  return n < 2 ? n : fibsRecNum(n - 1) + fibsRecNum(n - 2);
 }
 
-function fibArr(n) {
-  const array = [];
+function fibsRec(n) {
+  if (n === 0) return [];
+  else if (n === 1) return [0];
+  else if (n === 2) return [0, 1];
 
-  let i = 0;
-  while (i < n) {
-    array.push(fibRec(i));
-    i++;
-  }
+  const array = fibsRec(n - 1);
+  array.push(array[array.length - 1] + array[array.length - 2]);
   return array;
 }
 
-
-console.log("iteration: ", fibs(8));
-console.log("recursion: ", fibArr(8));
-
-/* this is the ideal solution (only for learning)
-
- function fibsRec(n) {
-  if (n <= 0) return [];
-  if (n === 1) return [0];
-  if (n === 2) return [0, 1];
-
-  const arr = fibsRec(n - 1);
-  arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
-  return arr;
-}  */
-
+console.log("iteration:", fibs(8)); // [0, 1, 1,  2, 3, 5, 8, 13]
+console.log("recursion (one Number):", fibsRecNum(8)); // 21
+console.log("recursion:", fibsRec(8)); // [0, 1, 1,  2, 3, 5, 8, 13]
